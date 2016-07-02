@@ -71,6 +71,7 @@ function deploy_s3_bucket() {
   fi
   local bucket_uri="s3://${1}"
   aws --profile $profile s3 sync public/ $bucket_uri --acl public-read
+  echo http://$bucket_name/
 }
 
 function generate_assume_role_policy() {
