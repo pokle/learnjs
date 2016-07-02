@@ -4,6 +4,8 @@ A Serverless Single Page App demo / scratch pad from the book.
 
 https://pragprog.com/book/brapps/serverless-single-page-apps
 
+Running at http://learnjs.shonky.info/
+
 ## Develop
 
   npm install -g livereloadx
