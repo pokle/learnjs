@@ -11,11 +11,16 @@ describe('LearnJS', function () {
     })
 
     it('passes the hash view paramter to the view function', function () {
-        
         spyOn(learnjs, 'problemView')
         learnjs.showView('#problem-42')
         expect(learnjs.problemView).toHaveBeenCalledWith('42')
     })
 
+    describe('problem view', function () {
+        it('has a title that inclues the problem number', function () {
+            var view = learnjs.problemView('1')
+            expect(view.text()).toEqual('Problem #1 Coming soon!')
+        })
+    })
 
 })
