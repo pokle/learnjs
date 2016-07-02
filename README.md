@@ -1,3 +1,17 @@
+# LearnJS
+
+A Serverless Single Page App demo / scratch pad from the book.
+
+https://pragprog.com/book/brapps/serverless-single-page-apps
+
+## Develop
+
+  npm install -g livereloadx
+  ./sspa liveserver
+
+## Deploy
+
+  ./sspa deploy_bucket learnjs.shonky.info
 
 ## Change Log
 
