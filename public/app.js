@@ -44,6 +44,14 @@ learnjs.buildCorrectFlash = function (problemNum) {
     return correctFlash;
 }
 
+learnjs.noSuchView = function() {
+    return learnjs.template('no-such-view')
+}
+
+learnjs.landingView = function () {
+    return learnjs.template('landing-view')
+}
+
 learnjs.problemView = function (data) {
     var problemNumber = parseInt(data, 10);
     var view = learnjs.template('problem-view');
@@ -79,16 +87,13 @@ learnjs.problemView = function (data) {
 
 learnjs.showView = function (hash) {
     var routes = {
+        '': learnjs.landingView,
         '#problem': learnjs.problemView
     }
     var hashParts = hash.split('-')
-    var viewFn = routes[hashParts[0]]
-    if (viewFn) {
-        var view = viewFn(hashParts[1])
-        $('.view-container').empty().append(view)
-    } else {
-        console.log("No view found for hash", hash)
-    }
+    var viewFn = routes[hashParts[0]] || learnjs.noSuchView
+    var view = viewFn(hashParts[1])
+    $('.view-container').empty().append(view)
 }
 
 learnjs.appOnReady = function () {
