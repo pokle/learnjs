@@ -81,6 +81,8 @@
     }
   </style>
   </style>
+  <meta name="google-signin-client_id" content="889728335631-tpc18aqgpk0o2q3p9nif6esllsvog2mg.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body>
@@ -90,6 +92,11 @@
         <li><a class='text-lg' href="#">LearnJS</a></li>
         <li><a href="#problem-1">Start</a></li>
       </ul>
+      <div class='four columns'>
+        <span class='navbar-padding u-pull-right'>
+            <span class="g-signin2" data-onsuccess="googleSignIn"></span>
+        </span>
+      </div>
     </div>
     <div class='view-container container'>
     </div>
