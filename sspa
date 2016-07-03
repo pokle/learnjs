@@ -5,6 +5,7 @@ root_dir=`dirname "$abspath"`
 app_name=learnjs
 code_bucket=${app_name}/_code_bundles
 profile=admin
+cognito_region=us-east-1
 
 function check_python() {
   if ! which python > /dev/null; then
@@ -137,6 +138,7 @@ function create_cognito_auth_role() {
     echo "Creaing role: $role_name"
     # Might be able to use the create_iam_role function for this
     aws --profile $profile iam create-role \
+      --region $cognito_region \
       --role-name "$role_name" \
       --assume-role-policy-document "file://${identity_pool_dir}/assume_role_policy.json" \
       > ${identity_pool_dir}/role_info.json
@@ -145,6 +147,9 @@ function create_cognito_auth_role() {
 
 
 function create_identity_pool() {
+  set -e
+  echo Using region $cognito_region for cognito
+
   local identity_pool_dir=${1%/}
   if [[ ! -e ${identity_pool_dir}/config.json ]]; then
     echo "Can't find pool config file ${identity_pool_dir}/config.json"
@@ -155,6 +160,7 @@ function create_identity_pool() {
   if [[ ! -s ${identity_pool_dir}/pool_info.json ]]; then
     echo "Creating identity pool: $identity_pool_name"
     aws --profile $profile cognito-identity create-identity-pool \
+      --region $cognito_region \
       --identity-pool-name $identity_pool_name \
       --cli-input-json "file://${identity_pool_dir}/config.json" \
       > ${identity_pool_dir}/pool_info.json
@@ -165,6 +171,7 @@ function create_identity_pool() {
   local role_arn=$(support/jsed.py ${identity_pool_dir}/role_info.json 'Role.Arn')
   echo "Updating identity pool roles"
   aws --profile $profile cognito-identity set-identity-pool-roles \
+    --region $cognito_region \
     --identity-pool-id ${pool_id} \
     --roles authenticated=${role_arn}
 }

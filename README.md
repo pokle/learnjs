@@ -6,6 +6,16 @@ https://pragprog.com/book/brapps/serverless-single-page-apps
 
 Running at http://learn.shonky.info/
 
+## Infrastructure
+
+Static site is hosted on AWS:
+
+    Route53 CNAME learnjs.shonky.info 
+      => CloudFront distribution with HTTPS Cert d1as0ohsaesuhb.cloudfront.net 
+        => S3 Static hosting learnjs.shonky.info.s3-website-ap-southeast-2.amazonaws.com 
+          => S3 bucket learnjs.shonky.info 
+
+
 ## Develop
 
   npm install -g livereloadx
